@@ -31,10 +31,6 @@ mongoose.connect(process.env.MONGODB_URI, {
     useCreateIndex: true,
 });
 
-app.get("/", (req, res) => {
-    res.json(res);
-});
-
 app.all("*", (req, res) => {
     res.status(404).json({
         error: "This root doesnt exist",
