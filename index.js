@@ -3,7 +3,7 @@ const express = require("express");
 const formidable = require("express-formidable");
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
-const cors = requite("cors");
+const cors = require("cors");
 require("dotenv").config();
 
 // Initialisation des packages :
