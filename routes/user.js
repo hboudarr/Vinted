@@ -48,9 +48,12 @@ router.post("/user/signup", async (req, res) => {
             // A TESTER SI FONCTIONNELLE
             if (req.files.pictures) {
                 // uploader la photo de profile de l'admin user
-                const resultImage = await cloudinary.uploader.upload({
-                    folder: `/vinted/users/${newUser._id}`,
-                });
+                const resultImage = await cloudinary.uploader.upload(
+                    req.files.picture.path,
+                    {
+                        folder: `/vinted/users/${newUser._id}`,
+                    }
+                );
             }
 
             await newUser.save();
