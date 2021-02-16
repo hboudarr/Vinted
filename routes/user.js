@@ -1,10 +1,13 @@
+// import
 const express = require("express");
 const { modelNames } = require("mongoose");
-const router = express.Router();
 const uid2 = require("uid2");
 const SHA256 = require("crypto-js/sha256");
 const encBase64 = require("crypto-js/enc-base64");
 const cloudinary = require("cloudinary").v2;
+
+// initialisation
+const router = express.Router();
 
 // Import des models
 const User = require("../models/User");
@@ -78,6 +81,7 @@ router.post("/user/signup", async (req, res) => {
 
 router.post("/user/login", async (req, res) => {
     try {
+        // chercher dans la bdd le profil coresspondant
         const user = await User.findOne({
             email: req.fields.email,
         });
@@ -87,7 +91,7 @@ router.post("/user/login", async (req, res) => {
             const password = req.fields.password;
             // creation d'un new hash
             const newHash = SHA256(password + user.salt).toString(encBase64);
-
+            // comparaison des 2 hash pour autentif
             if (newHash === user.hash) {
                 res.status(200).json({
                     _id: user._id,

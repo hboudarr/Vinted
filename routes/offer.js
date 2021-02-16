@@ -1,9 +1,12 @@
+// import
 const express = require("express");
 const formidable = require("express-formidable");
-const router = express.Router();
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
 const isAuthenticated = require("../middleware/isAuthenticated");
+
+// initialisation
+const router = express.Router();
 
 // identification cloudinary
 cloudinary.config({
@@ -31,6 +34,7 @@ router.post("/offer/publish", isAuthenticated, async (req, res) => {
             ],
             owner: req.user,
         });
+        // si une photo est chargé charger sur cloudinary
         if (req.files.picture) {
             const pictureToUpload = req.files.picture.path;
             const result = await cloudinary.uploader.upload(pictureToUpload, {

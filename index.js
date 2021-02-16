@@ -34,13 +34,13 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.get("/", (req, res) => {
     res.json("Route /  de la l'api Vinted !");
 });
-
+// si la route n existe pas
 app.all("*", (req, res) => {
     res.status(404).json({
         error: "This root doesnt exist",
     });
 });
-
+// port
 app.listen(process.env.PORT, () => {
     console.log("Server turning");
 });
