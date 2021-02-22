@@ -22,6 +22,7 @@ const { query } = require("express");
 
 router.post("/offer/publish", isAuthenticated, async (req, res) => {
     try {
+        console.log("entree");
         const offer = new Offer({
             product_name: req.fields.title,
             product_description: req.fields.description,
@@ -40,6 +41,7 @@ router.post("/offer/publish", isAuthenticated, async (req, res) => {
             const result = await cloudinary.uploader.upload(pictureToUpload, {
                 folder: `Vinted/offers/${pictureToUpload}`,
             });
+
             offer.product_image = result;
         }
         // offer.product_image = result // je pourrai egalement envoyer result en entier ou result.secure_url
